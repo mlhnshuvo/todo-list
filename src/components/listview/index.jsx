@@ -15,14 +15,14 @@ const ListItem = ({ todo, toggleSelect, toggleComplete }) => {
                 <h4>{todo.text}</h4>
                 <p>{todo.des}</p>
                 <p>{todo.time.toDateString()}</p>
+
+                <Button
+                    color={todo.isComplete ? 'danger' : 'success'}
+                    onClick={() => toggleComplete(todo.id)}
+                >
+                    {todo.isComplete ? 'Completed' : 'Running'}
+                </Button>
             </div>
-            <Button
-                className='ml-auto'
-                color={todo.isComplete ? 'danger' : 'success'}
-                onClick={() => toggleComplete(todo.id)}
-            >
-                {todo.isComplete ? 'Completed' : 'Running'}
-            </Button>
         </ListGroupItem>
     )
 }

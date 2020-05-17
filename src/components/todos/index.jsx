@@ -24,19 +24,11 @@ class Todos extends React.Component {
                 time: new Date(),
                 isComplete: false,
                 isSelect: false
-            },
-            {
-                id: 'dgf45cggrd',
-                text: 'Todo 3',
-                des: 'description 3',
-                time: new Date(),
-                isComplete: false,
-                isSelect: false
             }
         ],
         isOpenTodoForm: false,
         searchTerm: '',
-        view: 'list',
+        view: 'table',
         filter: 'all'
     }
 
@@ -92,17 +84,17 @@ class Todos extends React.Component {
     getView = () => {
         let todos = this.performSearch()
         todos = this.performFilter(todos)
-        return this.state.view === 'list' ? (
-            <ListView
+        return this.state.view === 'table' ? (
+            <TableView
                 todos={todos}
                 toggleSelect={this.toggleSelect}
-                toggleComplete={this.toggleComplete}
-            />
+                toggleComplete={this.toggleComplete} />
         ) : (
-                <TableView
+                <ListView
                     todos={todos}
                     toggleSelect={this.toggleSelect}
-                    toggleComplete={this.toggleComplete} />
+                    toggleComplete={this.toggleComplete}
+                />
             )
     }
 
@@ -124,7 +116,7 @@ class Todos extends React.Component {
         this.setState({
             filter: 'all',
             searchTerm: '',
-            view: 'list',
+            view: 'table',
             isOpenTodoForm: false
         })
     }

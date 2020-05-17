@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap'
-import SearchPanel from './search-panel'
+import SearchPanel from './search'
 import View from './view'
 import Bulk from './bulk'
 import Filter from './filter'

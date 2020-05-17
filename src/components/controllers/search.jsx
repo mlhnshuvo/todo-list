@@ -5,7 +5,7 @@ import {Input, Button} from 'reactstrap'
 const SearchPanel = ({term, handleSearch, toggleForm}) => (
     <div className = 'd-flex'>
         <Input
-        placeholder = 'Enter Search Term'
+        placeholder = 'Enter Search Term with Todo'
         className = 'mr-5'
         value={term}
         onChange={event => handleSearch(event.target.value)}

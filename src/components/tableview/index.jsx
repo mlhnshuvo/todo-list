@@ -45,7 +45,7 @@ const TableView = ({ todos, toggleSelect, toggleComplete }) => (
     <Table>
         <thead>
             <tr>
-                <th>#</th>
+                <th>Select</th>
                 <th>Time</th>
                 <th>Todo</th>
                 <th>Description</th>

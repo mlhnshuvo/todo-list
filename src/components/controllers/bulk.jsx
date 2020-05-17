@@ -4,13 +4,13 @@ import { Button, ButtonGroup } from 'reactstrap';
 
 const Bulk = ({ clearSelected, clearCompleted, reset }) => (
     <ButtonGroup>
-        <Button onClick={clearSelected}>
+        <Button color='danger' onClick={clearSelected}>
             Clear Selected
 		</Button>
-        <Button onClick={clearCompleted}>
+        <Button color='danger' onClick={clearCompleted}>
             Clear Completed
 		</Button>
-        <Button onClick={reset}>
+        <Button color='danger' onClick={reset}>
             Reset
 		</Button>
     </ButtonGroup>
