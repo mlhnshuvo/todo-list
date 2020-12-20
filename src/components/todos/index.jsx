@@ -38,7 +38,7 @@ class Todos extends React.Component {
         todo.isSelect = !todo.isSelect
 
         this.setState({ todos })
-    }
+       }
 
     toggleComplete = todoId => {
         const todos = [...this.state.todos]
@@ -52,14 +52,14 @@ class Todos extends React.Component {
         this.setState({ isOpenTodoForm: !this.state.isOpenTodoForm })
     }
 
-    handleSearch = (value) => {
-        this.setState({ searchTerm: value })
-    }
-
     changeView = (event) => {
         this.setState({
             view: event.target.value
         })
+    }
+
+    handleSearch = (value) => {
+        this.setState({ searchTerm: value })
     }
 
     performSearch = () => {

@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Row, Col } from 'reactstrap'
 import SearchPanel from './search'
 import View from './view'
@@ -30,7 +30,6 @@ const Controller = ({ term, toggleForm, handleSearch, handleFilter, view, change
             </Col>
         </Row>
     </div>
-
 )
 
 Controller.prototype = {
@@ -45,4 +44,4 @@ Controller.prototype = {
     reset: PropTypes.func.isRequired
 }
 
-export default Controller;
+export default Controller

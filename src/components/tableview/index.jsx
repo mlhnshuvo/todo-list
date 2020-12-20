@@ -40,7 +40,6 @@ RowItem.propTypes = {
     toggleComplete: PropTypes.func.isRequired
 }
 
-
 const TableView = ({ todos, toggleSelect, toggleComplete }) => (
     <Table>
         <thead>
