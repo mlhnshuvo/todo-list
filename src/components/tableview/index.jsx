@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Table, CustomInput, Button } from 'reactstrap'
+import { useStoreState, useStoreActions } from 'easy-peasy'
 
 const RowItem = ({ todo, toggleSelect, toggleComplete }) => {
     return (
@@ -34,40 +34,32 @@ const RowItem = ({ todo, toggleSelect, toggleComplete }) => {
     )
 }
 
-RowItem.propTypes = {
-    todo: PropTypes.object.isRequired,
-    toggleSelect: PropTypes.func.isRequired,
-    toggleComplete: PropTypes.func.isRequired
-}
-
-const TableView = ({ todos, toggleSelect, toggleComplete }) => (
-    <Table>
-        <thead>
-            <tr>
-                <th>Select</th>
-                <th>Time</th>
-                <th>Todo</th>
-                <th>Description</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {todos.map(todo => (
-                <RowItem
-                    key={todo.id}
-                    todo={todo}
-                    toggleSelect={toggleSelect}
-                    toggleComplete={toggleComplete}
-                />
-            ))}
-        </tbody>
-    </Table>
-);
-
-TableView.propTypes = {
-    todos: PropTypes.object.isRequired,
-    toggleSelect: PropTypes.func.isRequired,
-    toggleComplete: PropTypes.func.isRequired
+const TableView = () => {
+    const todos = useStoreState(state => state.getView)
+    const state = useStoreActions(state => state)
+    return (
+        <Table>
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Time</th>
+                    <th>Todo</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {todos.map(todo => (
+                    <RowItem
+                        key={todo.id}
+                        todo={todo}
+                        toggleSelect={state.toggleSelect}
+                        toggleComplete={state.toggleComplete}
+                    />
+                ))}
+            </tbody>
+        </Table>
+    )
 };
 
 export default TableView

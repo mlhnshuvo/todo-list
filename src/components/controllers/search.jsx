@@ -1,26 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Input, Button} from 'reactstrap'
+import { Input, Button } from 'reactstrap'
+import { useStoreActions } from 'easy-peasy'
 
-const SearchPanel = ({term, handleSearch, toggleForm}) => (
-    <div className = 'd-flex'>
-        <Input
-        placeholder = 'Enter Search Term with Todo'
-        className = 'mr-5'
-        value={term}
-        onChange={event => handleSearch(event.target.value)}
-        />
-        <Button
-        color='success'
-        onClick={toggleForm}
-        >New</Button>
-    </div>
-)
-
-SearchPanel.propTypes = {
-	term: PropTypes.string.isRequired,
-	handleSearch: PropTypes.func.isRequired,
-	toggleForm: PropTypes.func.isRequired
+const SearchPanel = ({ toggleForm }) => {
+    const state = useStoreActions(state => state)
+    return (
+        <div className='d-flex'>
+            <Input
+                placeholder='Enter Search Term with Todo'
+                className='mr-5'
+                onChange={event => state.handleSearch(event.target.value)}
+            />
+            <Button
+                color='success'
+                onClick={toggleForm}
+            >New</Button>
+        </div>
+    )
 }
 
 export default SearchPanel;

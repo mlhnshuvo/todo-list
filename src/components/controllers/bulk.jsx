@@ -1,25 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button, ButtonGroup } from 'reactstrap';
+import { useStoreActions } from 'easy-peasy'
 
-const Bulk = ({ clearSelected, clearCompleted, reset }) => (
-    <ButtonGroup>
-        <Button color='danger' onClick={clearSelected}>
-            Clear Selected
-		</Button>
-        <Button color='danger' onClick={clearCompleted}>
-            Clear Completed
-		</Button>
-        <Button color='danger' onClick={reset}>
-            Reset
-		</Button>
-    </ButtonGroup>
-)
-
-Bulk.propTypes = {
-    clearSelected: PropTypes.func.isRequired,
-    clearCompleted: PropTypes.func.isRequired,
-    reset: PropTypes.func.isRequired
-};
+const Bulk = () => {
+    const state = useStoreActions(state => state)
+    return (
+        <ButtonGroup>
+            <Button color='danger' onClick={()=> state.handleBulk('clearSelected')}>
+                Clear Selected
+            </Button>
+            <Button color='danger' onClick={()=> state.handleBulk('clearCompleted')}>
+                Clear Completed
+            </Button>
+            <Button color='danger' onClick={()=> state.handleBulk('reset')}>
+                Reset
+            </Button>
+        </ButtonGroup>
+    )
+}
 
 export default Bulk;

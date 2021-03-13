@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Label, CustomInput } from 'reactstrap'
 
 const View = ({ changeView, view }) => (
@@ -28,10 +27,5 @@ const View = ({ changeView, view }) => (
         </Label>
     </div>
 )
-
-View.propTypes = {
-    view: PropTypes.string.isRequired,
-    changeView: PropTypes.func.isRequired
-}
 
 export default View
