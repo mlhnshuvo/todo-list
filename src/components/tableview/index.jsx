@@ -1,6 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Table, CustomInput, Button } from 'reactstrap'
+import { connect } from 'react-redux'
+import store from '../../store'
 
 const RowItem = ({ todo, toggleSelect, toggleComplete }) => {
     return (
@@ -10,7 +11,7 @@ const RowItem = ({ todo, toggleSelect, toggleComplete }) => {
                     type='checkbox'
                     id={todo.id}
                     checked={todo.isSelect}
-                    onChange={() => toggleSelect(todo.id)}
+                    onChange={toggleSelect}
                 />
             </th>
             <th>
@@ -25,7 +26,7 @@ const RowItem = ({ todo, toggleSelect, toggleComplete }) => {
             <th>
                 <Button
                     color={todo.isComplete ? 'danger' : 'success'}
-                    onClick={() => toggleComplete(todo.id)}
+                    onClick={toggleComplete}
                 >
                     {todo.isComplete ? 'Completed' : 'Running'}
                 </Button>
@@ -34,40 +35,32 @@ const RowItem = ({ todo, toggleSelect, toggleComplete }) => {
     )
 }
 
-RowItem.propTypes = {
-    todo: PropTypes.object.isRequired,
-    toggleSelect: PropTypes.func.isRequired,
-    toggleComplete: PropTypes.func.isRequired
+const TableView = (props) => {
+    return (
+        <Table>
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Time</th>
+                    <th>Todo</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {props.todos.map(todo => (
+                    <RowItem
+                        key={todo.id}
+                        todo={todo}
+                        toggleSelect={() => store.dispatch({ type: 'toggleSelect', payload: todo.id })}
+                        toggleComplete={() => store.dispatch({ type: 'toggleSelect', payload: todo.id })}
+                    />
+                ))}
+            </tbody>
+        </Table>
+    );
 }
 
-const TableView = ({ todos, toggleSelect, toggleComplete }) => (
-    <Table>
-        <thead>
-            <tr>
-                <th>Select</th>
-                <th>Time</th>
-                <th>Todo</th>
-                <th>Description</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {todos.map(todo => (
-                <RowItem
-                    key={todo.id}
-                    todo={todo}
-                    toggleSelect={toggleSelect}
-                    toggleComplete={toggleComplete}
-                />
-            ))}
-        </tbody>
-    </Table>
-);
+const mapStateToProps = state => state
 
-TableView.propTypes = {
-    todos: PropTypes.object.isRequired,
-    toggleSelect: PropTypes.func.isRequired,
-    toggleComplete: PropTypes.func.isRequired
-};
-
-export default TableView
+export default connect(mapStateToProps)(TableView)

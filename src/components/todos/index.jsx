@@ -85,16 +85,9 @@ class Todos extends React.Component {
         let todos = this.performSearch()
         todos = this.performFilter(todos)
         return this.state.view === 'table' ? (
-            <TableView
-                todos={todos}
-                toggleSelect={this.toggleSelect}
-                toggleComplete={this.toggleComplete} />
+            <TableView />
         ) : (
-                <ListView
-                    todos={todos}
-                    toggleSelect={this.toggleSelect}
-                    toggleComplete={this.toggleComplete}
-                />
+                <ListView/>
             )
     }
 
