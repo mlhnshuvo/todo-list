@@ -1,5 +1,5 @@
 import React from 'react';
-import Todo from './components/todos/index'
+import Todo from './components/context'
 import { Container, Row, Col } from 'reactstrap'
 
 function App() {

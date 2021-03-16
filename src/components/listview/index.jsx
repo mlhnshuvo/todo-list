@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
 import { ListGroup, ListGroupItem, CustomInput, Button } from 'reactstrap'
+import { Context } from '../context'
 
 const ListItem = ({ todo, toggleSelect, toggleComplete }) => {
     return (
@@ -27,31 +27,20 @@ const ListItem = ({ todo, toggleSelect, toggleComplete }) => {
     )
 }
 
-ListItem.propTypes = {
-    todo: PropTypes.object.isRequired,
-    toggleSelect: PropTypes.func.isRequired,
-    toggleComplete: PropTypes.func.isRequired
-}
-
-const ListView = ({ todos, toggleComplete, toggleSelect }) => {
+const ListView = () => {
+    const context = useContext(Context)
     return (
         <ListGroup>
-            {todos.map(todo => (
+            {context.todos.map(todo => (
                 <ListItem
                     key={todo.id}
                     todo={todo}
-                    toggleSelect={toggleSelect}
-                    toggleComplete={toggleComplete}
+                    toggleSelect={context.toggleSelect}
+                    toggleComplete={context.toggleComplete}
                 />
             ))}
         </ListGroup>
     )
-}
-
-ListView.propTypes = {
-    todo: PropTypes.object.isRequired,
-    toggleSelect: PropTypes.func.isRequired,
-    toggleComplete: PropTypes.func.isRequired
 }
 
 export default ListView

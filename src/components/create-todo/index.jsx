@@ -1,56 +1,54 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Input, FormGroup, Label, Form } from 'reactstrap'
-import PropsType from 'prop-types'
+import { Context } from '../context'
 
-class CreateTodo extends React.Component {
-    state = {
+const CreateTodo = () => {
+    const context = useContext(Context)
+
+    const [form, setState] = useState({
         text: '',
         des: ''
-    }
+    })
 
-    handleChange = (event) => {
-        this.setState({
+    const handleChange = (event) => {
+        setState({
+            ...form,
             [event.target.name]: event.target.value
         })
     }
 
-    handleSubmit = event => {
+    const handleSubmit = event => {
         event.preventDefault()
-        this.props.createTodo(this.state)
+        context.createTodo(form)
         event.target.reset()
-        this.setState({
+        setState({
             text: '',
             des: ''
         })
     }
 
-    render() {
-        return (
-            <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                    <Label>Enter task</Label>
-                    <Input
-                        placeholder='Write something'
-                        name='text'
-                        value={this.state.text}
-                        onChange={this.handleChange}
-                    />
-                    <Label>Describe task</Label>
-                    <Input
-                        placeholder='Write something'
-                        name='des'
-                        value={this.state.des}
-                        onChange={this.handleChange}
-                    />
-                </FormGroup>
-                <Button type='submit'>Create task</Button>
-            </Form>
-        )
-    }
-}
+    return (
+        <Form onSubmit={handleSubmit}>
+            <FormGroup>
+                <Label>Enter task</Label>
+                <Input
+                    placeholder='Write something'
+                    name='text'
+                    value={form.text}
+                    onChange={handleChange}
+                />
+                <Label>Describe task</Label>
+                <Input
+                    placeholder='Write something'
+                    name='des'
+                    value={form.des}
+                    onChange={handleChange}
+                />
+            </FormGroup>
+            <Button type='submit'>Create task</Button>
+        </Form>
+    )
 
-CreateTodo.propsTypes = {
-    createTodo: PropsType.func.isRequired
 }
 
 export default CreateTodo;

@@ -1,25 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react'
 import { Button, ButtonGroup } from 'reactstrap';
+import { Context } from '../context'
 
-const Bulk = ({ clearSelected, clearCompleted, reset }) => (
-    <ButtonGroup>
-        <Button color='danger' onClick={clearSelected}>
-            Clear Selected
-		</Button>
-        <Button color='danger' onClick={clearCompleted}>
-            Clear Completed
-		</Button>
-        <Button color='danger' onClick={reset}>
-            Reset
-		</Button>
-    </ButtonGroup>
-)
-
-Bulk.propTypes = {
-    clearSelected: PropTypes.func.isRequired,
-    clearCompleted: PropTypes.func.isRequired,
-    reset: PropTypes.func.isRequired
-};
+const Bulk = () => {
+    const context = useContext(Context)
+    return (
+        <ButtonGroup>
+            <Button color='danger' onClick={context.clearSelected}>
+                Clear Selected
+            </Button>
+            <Button color='danger' onClick={context.clearCompleted}>
+                Clear Completed
+            </Button>
+            <Button color='danger' onClick={context.reset}>
+                Reset
+            </Button>
+        </ButtonGroup>
+    )
+}
 
 export default Bulk;
