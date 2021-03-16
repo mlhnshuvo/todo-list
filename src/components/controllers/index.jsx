@@ -5,9 +5,9 @@ import View from './view'
 import Bulk from './bulk'
 import Filter from './filter'
 
-const Controller = ({ term, toggleForm, handleSearch, handleFilter, view, changeView, clearSelected, clearCompleted, reset }) => (
+const Controller = ({ toggleForm, view, changeView }) => (
     <div>
-        <SearchPanel toggleForm={toggleForm}/>
+        <SearchPanel toggleForm={toggleForm} />
         <Row className='my-4'>
             <Col md={{ size: 4 }}>
                 <Filter />
@@ -18,10 +18,7 @@ const Controller = ({ term, toggleForm, handleSearch, handleFilter, view, change
                     changeView={changeView} />
             </Col>
             <Col md={{ size: 4 }} className='d-flex'>
-                <Bulk
-                    clearSelected={clearSelected}
-                    clearCompleted={clearCompleted}
-                    reset={reset} />
+                <Bulk />
             </Col>
         </Row>
     </div>

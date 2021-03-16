@@ -2,24 +2,26 @@ import React, { useState } from 'react';
 import { Button, Input, FormGroup, Label, Form } from 'reactstrap'
 import { useStoreActions } from 'easy-peasy'
 
-const CreateTodo = () => {
-    const st = useStoreActions(state => state)
+const CreateTodo = (props) => {
+    const states = useStoreActions(state => state)
 
-    const [text, setText] = useState('')
-    const [des, setDes] = useState('')
+    const [state, setState] = useState({
+        text: '',
+        des: ''
+    })
 
-    const textChange = (text) => {
-        setText(text)
+    const handleChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        })
     }
-
-    const desChange = (des) => {
-        setDes(des)
-    }
-
     const handleSubmit = event => {
         event.preventDefault()
-        st.createTodo({text, des})
+        states.createTodo(state)
         event.target.reset()
+        setState({ text: '', des: '' })
+        props.toggleForm()
     }
 
     return (
@@ -29,15 +31,15 @@ const CreateTodo = () => {
                 <Input
                     placeholder='Write something'
                     name='text'
-                    value={text}
-                    onChange={(e)=> textChange(e.target.value)}
+                    value={state.text}
+                    onChange={handleChange}
                 />
                 <Label>Describe task</Label>
                 <Input
                     placeholder='Write something'
                     name='des'
-                    value={des}
-                    onChange={(e)=> desChange(e.target.value)}
+                    value={state.des}
+                    onChange={handleChange}
                 />
             </FormGroup>
             <Button type='submit'>Create task</Button>

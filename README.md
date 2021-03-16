@@ -1,6 +1,7 @@
 # React-Todo-App
 
-This is a project template for mern apps. It lives at https://react-todo-app-mhs.netlify.app
+Please check out the branch and see how many tools I have used. 
+It lives at https://react-todo-app-mhs.netlify.app
 
 ```bash
 Feature:
@@ -15,7 +16,8 @@ Technology:
 • CSS
 • ReactStrap
 • Reactjs
-• Nodejs
+• Hook
+• Easy-peasy
 • Netlify
 ```
 

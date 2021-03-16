@@ -22,7 +22,6 @@ const store = createStore({
     ],
     searchTerm: '',
     filter: 'all',
-    bulk: '',
 
     createTodo: action((state, payload) => {
         payload.id = shortid.generate()
@@ -62,21 +61,24 @@ const store = createStore({
             return state.performSearch
         }
     }),
-    handleBulk: action((state, payload) => {
-        state.bulk = payload
-    }),
-    performBulk: computed(state => {
-        const allTodo = []
-        if (state.bulk === 'clearSelected') {
-            const todo = allTodo.filter(todo => !todo.isSelect)
-            allTodo.push(...todo)
-        } else if (state.bulk === 'clearCompleted') {
-            const todo = allTodo.filter(todo => !todo.isComplete)
-            allTodo.push(...todo)
-        } else {
-            allTodo.push(state.todos)
+    performBulk: action((state, payload) => {
+        if (payload === 'clearSelected') {
+            return {
+                ...state,
+                todos: state.todos.filter(todo => !todo.isSelect)
+            }
+        } else if (payload === 'clearCompleted') {
+            return {
+                ...state,
+                todos: state.todos.filter(todo => !todo.isComplete)
+            }
+        } else if (payload === 'reset') {
+            return {
+                ...state,
+                searchTerm: '',
+                filter: 'all'
+            }
         }
-        console.log(allTodo)
     }),
     getView: computed(state => {
         return state.performFilter

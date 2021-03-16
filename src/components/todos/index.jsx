@@ -1,79 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ListView from '../listview/index'
 import TableView from '../tableview/index'
 import Controller from '../controllers/index'
 import CreateTodo from '../create-todo/index'
-
 import { Modal, ModalBody, ModalHeader } from 'reactstrap'
 
-class Todos extends React.Component {
-    state = {
+const Todos = () => {
+    const [state, setState] = useState({
         isOpenTodoForm: false,
         view: 'table',
+    })
+
+    const toggleForm = () => {
+        setState({ ...state, isOpenTodoForm: !state.isOpenTodoForm })
     }
 
-    toggleForm = () => {
-        this.setState({ isOpenTodoForm: !this.state.isOpenTodoForm })
-    }
-
-    changeView = (event) => {
-        this.setState({
+    const changeView = (event) => {
+        setState({
+            ...state,
             view: event.target.value
         })
     }
 
-    getView = () => {
-        return this.state.view === 'table' ? (
+    const getView = () => {
+        return state.view === 'table' ? (
             <TableView />
         ) : (
             <ListView />
         )
     }
 
-    clearSelected = () => {
-        let todos = this.state.todos.filter(todo => !todo.isSelect)
-        this.setState({ todos })
-    }
-
-    clearCompleted = () => {
-        let todos = this.state.todos.filter(todo => !todo.isComplete)
-        this.setState({ todos })
-    }
-
-    reset = () => {
-        this.setState({
-            filter: 'all',
-            searchTerm: '',
-            view: 'table',
-            isOpenTodoForm: false
-        })
-    }
-
-    render() {
-        return (
+    return (
+        <div>
+            <h1 className='display-4 text-center mb-5'>React Todo App</h1>
+            <Controller
+                view={state.view}
+                toggleForm={toggleForm}
+                changeView={changeView}
+            />
             <div>
-                <h1 className='display-4 text-center mb-5'>React Todo App</h1>
-                <Controller
-                    view={this.state.view}
-                    toggleForm={this.toggleForm}
-                    changeView={this.changeView}
-                />
-                <div>
-                    {this.getView()}
-                </div>
-                <Modal
-                    isOpen={this.state.isOpenTodoForm}
-                    toggle={this.toggleForm}>
-                    <ModalHeader toggle={this.toggleForm}>
-                        Create New Todo
-                    </ModalHeader>
-                    <ModalBody>
-                        <CreateTodo/>
-                    </ModalBody>
-                </Modal>
+                {getView()}
             </div>
-        )
-    }
+            <Modal
+                isOpen={state.isOpenTodoForm}
+                toggle={toggleForm}>
+                <ModalHeader toggle={toggleForm}>
+                    Create New Todo
+                    </ModalHeader>
+                <ModalBody>
+                    <CreateTodo toggleForm={toggleForm}/>
+                </ModalBody>
+            </Modal>
+        </div>
+    )
 }
 
 export default Todos;

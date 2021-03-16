@@ -6,13 +6,13 @@ const Bulk = () => {
     const state = useStoreActions(state => state)
     return (
         <ButtonGroup>
-            <Button color='danger' onClick={()=> state.handleBulk('clearSelected')}>
+            <Button color='danger' onClick={()=> state.performBulk('clearSelected')}>
                 Clear Selected
             </Button>
-            <Button color='danger' onClick={()=> state.handleBulk('clearCompleted')}>
+            <Button color='danger' onClick={()=> state.performBulk('clearCompleted')}>
                 Clear Completed
             </Button>
-            <Button color='danger' onClick={()=> state.handleBulk('reset')}>
+            <Button color='danger' onClick={()=> state.performBulk('reset')}>
                 Reset
             </Button>
         </ButtonGroup>
