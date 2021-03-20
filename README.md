@@ -15,7 +15,7 @@ Technology:
 • CSS
 • ReactStrap
 • Reactjs
-• Nodejs
+• Hook with context API
 • Netlify
 ```
 
