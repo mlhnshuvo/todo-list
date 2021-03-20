@@ -26,8 +26,7 @@ const RowItem = ({ todo, toggleSelect, toggleComplete }) => {
             <th>
                 <Button
                     color={todo.isComplete ? 'danger' : 'success'}
-                    onClick={toggleComplete}
-                >
+                    onClick={toggleComplete}>
                     {todo.isComplete ? 'Completed' : 'Running'}
                 </Button>
             </th>
@@ -48,17 +47,17 @@ const TableView = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {props.todos.map(todo => (
+                {props.performFilter.map(todo => (
                     <RowItem
                         key={todo.id}
                         todo={todo}
                         toggleSelect={() => store.dispatch({ type: 'toggleSelect', payload: todo.id })}
-                        toggleComplete={() => store.dispatch({ type: 'toggleSelect', payload: todo.id })}
+                        toggleComplete={() => store.dispatch({ type: 'toggleComplete', payload: todo.id })}
                     />
                 ))}
             </tbody>
         </Table>
-    );
+    )
 }
 
 const mapStateToProps = state => state

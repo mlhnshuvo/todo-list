@@ -1,6 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { ListGroup, ListGroupItem, CustomInput, Button } from 'reactstrap'
+import { connect } from 'react-redux'
+import store from '../../store'
 
 const ListItem = ({ todo, toggleSelect, toggleComplete }) => {
     return (
@@ -9,7 +10,7 @@ const ListItem = ({ todo, toggleSelect, toggleComplete }) => {
                 type='checkbox'
                 id={todo.id}
                 checked={todo.isSelect}
-                onChange={() => toggleSelect(todo.id)}
+                onChange={toggleSelect}
             />
             <div className='mx-3'>
                 <h4>{todo.text}</h4>
@@ -18,7 +19,7 @@ const ListItem = ({ todo, toggleSelect, toggleComplete }) => {
 
                 <Button
                     color={todo.isComplete ? 'danger' : 'success'}
-                    onClick={() => toggleComplete(todo.id)}
+                    onClick={toggleComplete}
                 >
                     {todo.isComplete ? 'Completed' : 'Running'}
                 </Button>
@@ -27,31 +28,22 @@ const ListItem = ({ todo, toggleSelect, toggleComplete }) => {
     )
 }
 
-ListItem.propTypes = {
-    todo: PropTypes.object.isRequired,
-    toggleSelect: PropTypes.func.isRequired,
-    toggleComplete: PropTypes.func.isRequired
-}
 
-const ListView = ({ todos, toggleComplete, toggleSelect }) => {
+const ListView = (props) => {
     return (
         <ListGroup>
-            {todos.map(todo => (
+            {props.search.map(todo => (
                 <ListItem
                     key={todo.id}
                     todo={todo}
-                    toggleSelect={toggleSelect}
-                    toggleComplete={toggleComplete}
+                    toggleSelect={() => store.dispatch({ type: 'toggleSelect', payload: todo.id })}
+                    toggleComplete={() => store.dispatch({ type: 'toggleComplete', payload: todo.id })}
                 />
             ))}
         </ListGroup>
     )
 }
 
-ListView.propTypes = {
-    todo: PropTypes.object.isRequired,
-    toggleSelect: PropTypes.func.isRequired,
-    toggleComplete: PropTypes.func.isRequired
-}
+const mapStateToProps = state => state
 
-export default ListView
+export default connect(mapStateToProps)(ListView)

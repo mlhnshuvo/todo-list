@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Input, FormGroup, Label, Form } from 'reactstrap'
-import PropsType from 'prop-types'
+import store from '../../store/index'
 
 class CreateTodo extends React.Component {
     state = {
@@ -16,7 +16,7 @@ class CreateTodo extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        this.props.createTodo(this.state)
+        store.dispatch({ type: 'createTodo', payload: this.state })
         event.target.reset()
         this.setState({
             text: '',
@@ -47,10 +47,6 @@ class CreateTodo extends React.Component {
             </Form>
         )
     }
-}
-
-CreateTodo.propsTypes = {
-    createTodo: PropsType.func.isRequired
 }
 
 export default CreateTodo;

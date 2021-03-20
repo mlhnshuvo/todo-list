@@ -1,16 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {Button, ButtonGroup} from 'reactstrap'
+import { Button, ButtonGroup } from 'reactstrap'
+import store from '../../store/index'
 
-const Filter = ({handleFilter}) => (
+const Filter = () => (
     <ButtonGroup>
-        <Button onClick={() => handleFilter('all')}>All</Button>
-        <Button onClick={() => handleFilter('running')}>Running</Button>
-        <Button onClick={() => handleFilter('completed')}>Completed</Button>
+        <Button onClick={() => store.dispatch({ type: 'handleFilter', payload: 'all' })}>All</Button>
+        <Button onClick={() => store.dispatch({ type: 'handleFilter', payload: 'running' })}>Running</Button>
+        <Button onClick={() => store.dispatch({ type: 'handleFilter', payload: 'complete' })}>Completed</Button>
     </ButtonGroup>
 )
 
-Filter.propTypes = {
-    handleFilter: PropTypes.func.isRequired
-}
 export default Filter
