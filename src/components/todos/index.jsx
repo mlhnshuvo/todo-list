@@ -38,7 +38,7 @@ class Todos extends React.Component {
         todo.isSelect = !todo.isSelect
 
         this.setState({ todos })
-       }
+    }
 
     toggleComplete = todoId => {
         const todos = [...this.state.todos]
@@ -81,21 +81,27 @@ class Todos extends React.Component {
         }
     }
 
+    dndHandler = dnd => {
+        this.setState({ todos: dnd })
+    }
+
     getView = () => {
         let todos = this.performSearch()
         todos = this.performFilter(todos)
         return this.state.view === 'table' ? (
             <TableView
                 todos={todos}
+                dndHandler={this.dndHandler}
                 toggleSelect={this.toggleSelect}
                 toggleComplete={this.toggleComplete} />
         ) : (
-                <ListView
-                    todos={todos}
-                    toggleSelect={this.toggleSelect}
-                    toggleComplete={this.toggleComplete}
-                />
-            )
+            <ListView
+                todos={todos}
+                dndHandler={this.dndHandler}
+                toggleSelect={this.toggleSelect}
+                toggleComplete={this.toggleComplete}
+            />
+        )
     }
 
     handleFilter = (filter) => {

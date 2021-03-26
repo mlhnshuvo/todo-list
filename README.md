@@ -9,6 +9,7 @@ Feature:
 • Table view and List view
 • Filter
 • Bulk
+• React Drag and Drop
 
 Technology:
 • HTML
@@ -17,6 +18,7 @@ Technology:
 • Reactjs
 • Nodejs
 • Netlify
+• React Beautiful Drag and Drop
 ```
 
 ## Get started
