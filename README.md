@@ -1,6 +1,7 @@
 # React-Todo-App
 
-Please check out the branch and see how many tools I have used. It lives at https://react-todo-app-mhs.netlify.app
+Please check out the branch and see how many tools I have used. </br>
+It lives at https://todolist-mhs.netlify.app
 
 ```bash
 Feature:
